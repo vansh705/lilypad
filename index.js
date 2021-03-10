@@ -412,6 +412,46 @@ function requestListner(request, response) {
                             });
                         return;
 
+                        case "href.li":
+                            got(requestedUrl.href, {
+                                headers: {
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                    "Accept-Language": "en-US,en;q=0.5",
+                                    "Accept-Encoding": "gzip, deflate, br",
+                                    "DNT": "1",
+                                    "Connection": "keep-alive",
+                                    "Upgrade-Insecure-Requests": "1"
+                                }
+                            }).then(function(resp) {
+                                var $ = cheerio.load(resp.body);
+                                var r = $("a").attr("href");
+                                var j = JSON.stringify({
+                                    "success": true,
+                                    "url": r
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                response.end(j);
+                            }).catch(function(error) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": error.code,
+                                        "stack": error.stack,
+                                        "message": error.message
+                                    }
+                                });
+                                response.end(j);
+                            });
+                        return;
+
                         case "adfoc.us":
                             got(requestedUrl.href, {
                                 headers: {
