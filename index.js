@@ -21,7 +21,6 @@ function requestListner(request, response) {
                         case "adshrink.it":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": "adshrink.it",
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -83,7 +82,6 @@ function requestListner(request, response) {
                             var uu = "https://publisher.linkvertise.com/api/v1/redirect/link/static" + requestedUrl.pathname;
                             got(uu, { 
                                 headers: {
-                                    "Host": "publisher.linkvertise.com",
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -107,7 +105,6 @@ function requestListner(request, response) {
                                 var uu2 = "https://publisher.linkvertise.com/api/v1/redirect/link" + requestedUrl.pathname + "/target?serial=" + serial;
                                 got(uu2, {
                                     headers: {
-                                        "Host": "publisher.linkvertise.com",
                                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                         "Accept-Language": "en-US,en;q=0.5",
@@ -165,7 +162,6 @@ function requestListner(request, response) {
                         case "t.co":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -181,13 +177,13 @@ function requestListner(request, response) {
                                 r = r.split('replace("')[1];
                                 r = r.split('"').slice(0, (r.split('"').length - 1)).join('"');
                                 r = r.split("\\").join("");
-                                response.writeHead(200, {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Content-Type": "application/json"
-                                });
                                 var j = JSON.stringify({
                                     "success": true,
                                     "url": r
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
                                 });
                                 response.end(j);
                             }).catch(function(error) {
@@ -211,7 +207,6 @@ function requestListner(request, response) {
                         case "shortly.xyz":
                             got(u, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -227,7 +222,6 @@ function requestListner(request, response) {
                                 got.post("https://shortly.xyz/getlink.php", {
                                     body: i,
                                     headers: {
-                                        "Host": requestedUrl.host,
                                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                         "Accept": "*/*",
                                         "Accept-Language": "en-US,en;q=0.5",
@@ -241,13 +235,13 @@ function requestListner(request, response) {
                                         "DNT": "1"
                                     }
                                 }).then(function(resp) {
-                                    response.writeHead(200, {
-                                        "Access-Control-Allow-Origin": "*",
-                                        "Content-Type": "application/json"
-                                    });
                                     var j = JSON.stringify({
                                         "success": true,
                                         "url": resp.body
+                                    });
+                                    response.writeHead(200, {
+                                        "Access-Control-Allow-Origin": "*",
+                                        "Content-Type": "application/json"
                                     });
                                     response.end(j);
                                 }).catch(function(error) {
@@ -288,7 +282,6 @@ function requestListner(request, response) {
                         case "www.sub2unlock.net":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -299,13 +292,13 @@ function requestListner(request, response) {
                                 }
                             }).then(function(resp) {
                                 var $ = cheerio.load(resp.body);
-                                response.writeHead(200, {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Content-Type": "application/json"
-                                });
                                 var j = JSON.stringify({
                                     "success": true,
                                     "url": $("#theGetLink").text()
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
                                 });
                                 response.end(j);
                             }).catch(function(error) {
@@ -329,7 +322,6 @@ function requestListner(request, response) {
                         case "shortconnect.com":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -340,13 +332,13 @@ function requestListner(request, response) {
                                 }
                             }).then(function(resp) {
                                 var $ = cheerio.load(resp.body);
-                                response.writeHead(200, {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Content-Type": "application/json"
-                                });
                                 var j = JSON.stringify({
                                     "success": true,
                                     "url": $("#loader-link")[0].attribs.href
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
                                 });
                                 response.end(j);
                             }).catch(function(error) {
@@ -372,7 +364,6 @@ function requestListner(request, response) {
                         case "bst.gg":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -391,13 +382,13 @@ function requestListner(request, response) {
                                     ) {
                                         var r = Buffer.from($("script")[c].attribs.version, "base64");
                                         r = r.toString("ascii");
-                                        response.writeHead(200, {
-                                            "Access-Control-Allow-Origin": "*",
-                                            "Content-Type": "application/json"
-                                        });
                                         var j = JSON.stringify({
                                             "success": true,
                                             "url": r
+                                        });
+                                        response.writeHead(200, {
+                                            "Access-Control-Allow-Origin": "*",
+                                            "Content-Type": "application/json"
                                         });
                                         response.end(j);
                                     } else {
@@ -421,10 +412,47 @@ function requestListner(request, response) {
                             });
                         return;
 
+                        case "adfoc.us":
+                            got(requestedUrl.href, {
+                                headers: {
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                    "Accept-Language": "en-US,en;q=0.5",
+                                    "Accept-Encoding": "gzip, deflate, br",
+                                    "DNT": "1",
+                                    "Connection": "keep-alive",
+                                    "Upgrade-Insecure-Requests": "1"
+                                }
+                            }).then(function(resp) {
+                                var $ = cheerio.load(resp);
+                                var j = JSON.stringify({
+                                    "success": true,
+                                    "url": $("#showSkip .skip")[0].attribs.href
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                response.end(j);
+                            }).catch(function(error) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": error.code,
+                                        "stack": error.stack,
+                                        "message": error.message
+                                    }
+                                });
+                                response.end(j);
+                            })
+
                         default:
                             got(requestedUrl.href, {
                                 headers: {
-                                    "Host": requestedUrl.host,
                                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
@@ -561,7 +589,44 @@ function requestListner(request, response) {
                 }
         }
     } else {
-
+        if (fs.existsSync(__dirname + "/frontend" + url.pathname + "index.html")) {
+            fs.readFile(__dirname + "/frontend" + url.pathname + "index.html", function(err, resp) {
+                if (err) {
+                    response.writeHead(500, {
+                        "Access-Control-Allow-Origin": "*",
+                        "Content-Type": "text/plain"
+                    });
+                    response.end(err.message);
+                } else {
+                    response.writeHead(200, {
+                        "Access-Control-Allow-Origin": "*",
+                        "Content-Type": "text/html"
+                    });
+                    response.end(resp);
+                }
+            })
+        } else if (fs.existsSync(__dirname + "/frontend" + url.pathname)) {
+            fs.readFile(__dirname + "/frontend" + url.pathname, function(err, resp) {
+                if (err) {
+                    response.writeHead(500, {
+                        "Access-Control-Allow-Origin": "*",
+                        "Content-Type": "text/plain"
+                    });
+                    response.end(err.message);
+                } else {
+                    response.writeHead(200, {
+                        "Access-Control-Allow-Origin": "*"
+                    });
+                    response.end(resp);
+                }
+            });
+        } else {
+            response.writeHead(404, {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "text/plain"
+            });
+            response.end("404 - file not found");
+        }
     }
 }
 

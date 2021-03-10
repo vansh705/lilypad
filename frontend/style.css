@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+h2, p {
+    font-family:'Open Sans', Helvetica, sans-serif;
+    margin-bottom:5px;
+    margin-top:0;
+}
+
+input, button {
+    font-family:Helvetica;
+}
