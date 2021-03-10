@@ -17,9 +17,11 @@ The endpoint to get the URL of a tracker/protected link.
 
 - ``url`` (required) - base-64 *and* URI encoded URL
 
-```http://localhost:32333/api/bypass?url=aHR0cHM6Ly90aW55dXJsLmNvbS8zNXVqbmRrZQ==```
+```
+http://localhost:32333/api/bypass?url=aHR0cHM6Ly90aW55dXJsLmNvbS8zNXVqbmRrZQ==
+```
 
-*Example link used is [https://github.com/](https://github.com)*.
+*Example link redirects to [https://github.com/](https://github.com)*.
 
 **Response**
 
@@ -35,4 +37,4 @@ The endpoint to get the URL of a tracker/protected link.
 
 If ``success`` is ``true``, it will give you a ``url`` variable, linking to the result.
 
-If ``success`` is ``false``, the response will contain an ``err`` object, more details below.
+If ``success`` is ``false``, the response will contain an ``err`` object, containing a message, code and stack, if the error has them.
