@@ -4,6 +4,7 @@ if (window.location.hash !== "") {document.getElementById("url").value = window.
 function bypass() {
     document.getElementById("success").style.display = "none";
     document.getElementById("fail").style.display = "none";
+    document.getElementById("loading").style.display = "";
     var xhr = new XMLHttpRequest();
     var url = document.getElementById("url").value;
     url = btoa(url);
@@ -14,10 +15,12 @@ function bypass() {
         var j = JSON.parse(xhr.responseText);
         if (j.success == true && j.url) {
             document.getElementById("success").style.display = "";
+            document.getElementById("loading").style.display = "none";
             document.getElementById("link").href = j.url;
             document.getElementById("link").innerHTML = j.url;
         } else {
             document.getElementById("fail").style.display = "";
+            document.getElementById("loading").style.display = "none";
             document.getElementById("errTxt").innerHTML = j.err.message;
         }
     }
