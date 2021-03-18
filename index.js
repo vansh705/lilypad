@@ -103,7 +103,7 @@ function requestListner(request, response) {
                                 });
                                 serial = Buffer.from(serial).toString("base64");
                                 var uu2 = "https://publisher.linkvertise.com/api/v1/redirect/link" + requestedUrl.pathname + "/target?serial=" + serial;
-                                got(uu2, {
+                                got.post(uu2, {
                                     headers: {
                                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
