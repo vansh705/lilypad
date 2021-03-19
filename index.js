@@ -497,7 +497,7 @@ function requestListner(request, response) {
 
                         case "ouo.io":
                         case "ouo.press":
-                            puppeteer.launch().then(async function(b) {
+                            puppeteer.launch({headeless:true, args: ["no-snadbox"]}).then(async function(b) {
                                 const p = await b.newPage();
                                 await p.goto(requestedUrl.href);
                                 await p.waitForTimeout(2000);
