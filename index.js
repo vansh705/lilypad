@@ -488,7 +488,9 @@ function requestListner(request, response) {
                                     }
                                 });
                                 response.end(j);
-                            })
+                            });
+                        return;
+                        
 
                         default:
                             got(requestedUrl.href, {
