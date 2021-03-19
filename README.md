@@ -51,7 +51,7 @@ http://localhost:32333/api/bypass?url=aHR0cHM6Ly90aW55dXJsLmNvbS8zNXVqbmRrZQ==
 
 If ``success`` is ``true``, it will give you a ``url`` variable, linking to the result.
 
-If ``success`` is ``false``, the response will contain an ``err`` object, containing a message, code and stack, if the error has them.
+If ``success`` is ``false``, the response will contain an ``err`` object, containing a message, code, and stack - if the error has them.
 
 
 ## special thanks
