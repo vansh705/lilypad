@@ -22,6 +22,9 @@
   "homepage": "https://github.com/normanlol/lilypad#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
-    "got": "^11.8.2"
+    "got": "^11.8.2",
+    "puppeteer": "^8.0.0",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-stealth": "^2.7.6"
   }
 }

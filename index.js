@@ -1,8 +1,12 @@
 const got = require("got");
 const cheerio = require("cheerio");
+const puppeteer = require("puppeteer-extra");
+const stealth = require("puppeteer-extra-plugin-stealth");
+puppeteer.use(stealth());
 const http = require("http");
 const fs = require("fs");
 const { parse } = require("url");
+const { Browser } = require("puppeteer");
 const port = process.env.PORT || 32333;
 
 http.createServer(requestListner).listen(port);
@@ -490,7 +494,44 @@ function requestListner(request, response) {
                                 response.end(j);
                             });
                         return;
-                        
+
+                        case "ouo.io":
+                        case "ouo.press":
+                            puppeteer.launch().then(async function(b) {
+                                const p = await b.newPage();
+                                await p.goto(requestedUrl.href);
+                                await p.waitForTimeout(2000);
+                                const a = await p.$("#btn-main");
+                                await a.evaluate( a => a.click() );
+                                setTimeout(async function() {
+                                    const u = await p.url();
+                                    await b.close();
+                                    var j = JSON.stringify({
+                                        "success": true,
+                                        "url": u
+                                    });
+                                    response.writeHead(200, {
+                                        "Access-Control-Allow-Origin": "*",
+                                        "Content-Type": "application/json"
+                                    });
+                                    response.end(j);
+                                }, 3000);
+                            }).catch(function(err) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": err.code,
+                                        "stack": err.stack,
+                                        "message": err.message
+                                    }
+                                });
+                                response.end(j);
+                            });
+                        return;
 
                         default:
                             got(requestedUrl.href, {
@@ -627,8 +668,23 @@ function requestListner(request, response) {
                             "code": "needUrl",
                             "message": "This endpoint requires a URL."
                         }
-                    }))
+                    }));
                 }
+            return;
+
+            default: 
+                response.writeHead(400, {
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json"
+                });
+                response.end(JSON.stringify({
+                    "success": false,
+                    "err": {
+                        "code": "invalidEndpoint",
+                        "message": "An invalid endpoint was requested."
+                    }
+                }))
+            return;
         }
     } else {
         if (fs.existsSync(__dirname + "/frontend" + url.pathname + "index.html")) {
