@@ -5,7 +5,7 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 - Completely unlicensed, free code.
 - Open JSON API for developers.
 - Regularly updated, new redirects are constantly added.
-- Easily self-hostable, even compatible with Heroku.
+- Easily self-hostable, even compatible with Heroku (requires [extra setup](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-heroku)).
 
 ### currently supported
 - adshrink.it
