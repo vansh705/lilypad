@@ -500,14 +500,15 @@ function requestListner(request, response) {
 
                         case "ouo.io":
                         case "ouo.press":
-                            puppeteer.launch({headeless:true, args: ["--no-sandbox"]}).then(async function(b) {
+                            puppeteer.launch({headeless:true, args: ["--no-sandbox", "--disable-dev-shm-usage"]}).then(async function(b) {
                                 const p = await b.newPage();
                                 await p.goto(requestedUrl.href);
-                                await p.waitForTimeout(2000);
+                                await p.waitForSelector("#captcha .disabled", {hidden: true});
                                 const a = await p.$("#btn-main");
                                 await a.evaluate( a => a.click() );
                                 setTimeout(async function() {
                                     const u = await p.url();
+                                    await p.close();
                                     await b.close();
                                     var j = JSON.stringify({
                                         "success": true,
