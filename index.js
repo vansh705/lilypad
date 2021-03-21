@@ -21,6 +21,10 @@ function requestListner(request, response) {
                 if (url.query.url) {
                     var u = Buffer.from(url.query.url, "base64").toString("ascii");
                     var requestedUrl = parse(u, true);
+                    if (requestedUrl.protocol == "https:" && requestedUrl.hostname == "ow.ly") {
+                        var u = "http" + u.substring(5);
+                        var requestedUrl = parse(u, true);
+                    }
                     switch(requestedUrl.hostname) {
                         case "adshrink.it":
                             got(requestedUrl.href, {
@@ -176,7 +180,6 @@ function requestListner(request, response) {
                                 }
                             }).then(function(resp) {
                                 var $ = cheerio.load(resp.body);
-                                console.log(resp.body)
                                 var r = $("script")[0].children[0].data;
                                 r = r.split('replace("')[1];
                                 r = r.split('"').slice(0, (r.split('"').length - 1)).join('"');

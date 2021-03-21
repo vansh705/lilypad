@@ -19,7 +19,7 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 - adf.ly (& aliases)
 - ouo.io / ouo.press
 - href.li
-- general redirects (tested on bit.ly, tinyurl.com, goo.gl)
+- general redirects (tested on bit.ly, tinyurl.com, goo.gl, youtu.be, ow.ly)
 
 ## api endpoints
 Here are the current API endpoints for Lilypad.
