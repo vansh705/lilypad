@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-h2, p {
+body {
     font-family:'Open Sans', Helvetica, sans-serif;
+}
+
+h2, p {
     margin-bottom:5px;
     margin-top:0;
 }

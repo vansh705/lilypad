@@ -500,41 +500,44 @@ function requestListner(request, response) {
 
                         case "ouo.io":
                         case "ouo.press":
-                            puppeteer.launch({headeless:true, args: ["--no-sandbox", "--disable-dev-shm-usage"]}).then(async function(b) {
-                                const p = await b.newPage();
-                                await p.goto(requestedUrl.href);
-                                await p.waitForSelector("#captcha .disabled", {hidden: true});
-                                const a = await p.$("#btn-main");
-                                await a.evaluate( a => a.click() );
-                                setTimeout(async function() {
-                                    const u = await p.url();
-                                    await p.close();
-                                    await b.close();
-                                    var j = JSON.stringify({
-                                        "success": true,
-                                        "url": u
-                                    });
-                                    response.writeHead(200, {
+                            (async() => {
+                                const browser = await puppeteer.launch({headeless:true, args: ["--no-sandbox", "--disable-dev-shm-usage"]});
+                                try {
+                                    const p = await browser.newPage();
+                                    await p.goto(requestedUrl.href);
+                                    await p.waitForSelector("#captcha .disabled", {hidden: true});
+                                    const a = await p.$("#btn-main");
+                                    await a.evaluate( a => a.click() );
+                                    setTimeout(async function() {
+                                        const u = await p.url();
+                                        var j = JSON.stringify({
+                                            "success": true,
+                                            "url": u
+                                        });
+                                        response.writeHead(200, {
+                                            "Access-Control-Allow-Origin": "*",
+                                            "Content-Type": "application/json"
+                                        });
+                                        response.end(j);
+                                    }, 3000);
+                                } catch(error) {
+                                    response.writeHead(500, {
                                         "Access-Control-Allow-Origin": "*",
                                         "Content-Type": "application/json"
                                     });
+                                    var j = JSON.stringify({
+                                        "success": false,
+                                        "err": {
+                                            "code": err.code,
+                                            "stack": err.stack,
+                                            "message": err.message
+                                        }
+                                    });
                                     response.end(j);
-                                }, 3000);
-                            }).catch(function(err) {
-                                response.writeHead(500, {
-                                    "Access-Control-Allow-Origin": "*",
-                                    "Content-Type": "application/json"
-                                });
-                                var j = JSON.stringify({
-                                    "success": false,
-                                    "err": {
-                                        "code": err.code,
-                                        "stack": err.stack,
-                                        "message": err.message
-                                    }
-                                });
-                                response.end(j);
-                            });
+                                } finally {
+                                    await browser.close();
+                                }
+                            })();
                         return;
 
                         default:
