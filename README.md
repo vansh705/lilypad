@@ -5,9 +5,9 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 - Completely unlicensed, free code.
 - Open JSON API for developers.
 - Regularly updated, new redirects are constantly added.
-- Easily self-hostable, even compatible with Heroku (requires [extra setup](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-heroku)).
+- Easily self-hostable, even compatible with Heroku.
 
-### currently supported
+## currently supported
 - adshrink.it
 - linkvertise (& aliases)
 - t.co
@@ -17,9 +17,12 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 - boost.ink (& aliases)
 - adfoc.us
 - adf.ly (& aliases)
-- ouo.io / ouo.press
+- ouo.io* / ouo.press*
 - href.li
 - general redirects (tested on bit.ly, tinyurl.com, goo.gl, youtu.be, ow.ly)
+
+### note
+Websites marked with a * require an AntiCaptcha subscription. [Setup information can be found here](/setup/README.md).
 
 ## api endpoints
 Here are the current API endpoints for Lilypad.
@@ -58,3 +61,5 @@ If ``success`` is ``false``, the response will contain an ``err`` object, contai
 This was inspired by [Universal Bypass](https://universal-bypass.org/) and some code on the server was adapted from it.
 
 Some code was also used from an attempt of this project a bit farther back - [here](https://github.com/normanlol/bypass-api).
+
+This project is also possible thanks to [AntiCaptcha](http://getcaptchasolution.com/rpsgehhafa) (uses referal link).

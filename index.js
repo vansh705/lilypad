@@ -1,13 +1,15 @@
 const got = require("got");
 const cheerio = require("cheerio");
-const puppeteer = require("puppeteer-extra");
-const stealth = require("puppeteer-extra-plugin-stealth");
-puppeteer.use(stealth());
 const http = require("http");
 const fs = require("fs");
 const { parse } = require("url");
-const { Browser } = require("puppeteer");
+const ac = require("@antiadmin/anticaptchaofficial");
 const port = process.env.PORT || 32333;
+if (process.env.ACKEY) {
+    fs.writeFileSync(__dirname + "/config.json", JSON.stringify({
+        "key": process.env.ACKEY
+    }));
+}
 
 http.createServer(requestListner).listen(port);
 console.log("[i] listening on port " + port);
@@ -500,27 +502,192 @@ function requestListner(request, response) {
 
                         case "ouo.io":
                         case "ouo.press":
-                            (async() => {
-                                const browser = await puppeteer.launch({headeless:true, args: ["--no-sandbox", "--disable-dev-shm-usage"]});
-                                try {
-                                    const p = await browser.newPage();
-                                    await p.goto(requestedUrl.href);
-                                    await p.waitForSelector("#captcha .disabled", {hidden: true});
-                                    const a = await p.$("#btn-main");
-                                    await a.evaluate( a => a.click() );
-                                    setTimeout(async function() {
-                                        const u = await p.url();
-                                        var j = JSON.stringify({
-                                            "success": true,
-                                            "url": u
+                            if (fs.existsSync(__dirname + "/config.json")) {
+                                ac.setAPIKey(JSON.parse(fs.readFileSync(__dirname + "/config.json")).key);
+                                got(requestedUrl.href, {
+                                    headers: {
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                        "Accept-Language": "en-US,en;q=0.5",
+                                        "Accept-Encoding": "gzip, deflate, br",
+                                        "DNT": "1",
+                                        "Connection": "keep-alive",
+                                        "Upgrade-Insecure-Requests": "1"
+                                    }   
+                                }).then(function(resp) {
+                                    var $ = cheerio.load(resp.body);
+                                    var coo = "";
+                                    for (var c in resp.headers["set-cookie"]) {
+                                        var coo = coo + resp.headers["set-cookie"][c].split("; ")[0] + "; ";
+                                    }
+                                    for (var c in $("head script")) {
+                                        if ($("head script")[c].attribs && $("head script")[c].attribs.src && $("head script")[c].attribs.src.includes("?render")) {
+                                            var sk = parse($("head script")[c].attribs.src, true).query.render;
+                                        } else {
+                                            continue;
+                                        }
+                                    }
+                                    ac.shutUp();
+                                    ac.solveRecaptchaV2Proxyless(requestedUrl.href, sk).then(function(resp) {
+                                        var b = "_token=" + $("#form-captcha [name=_token]").val() + "&x-token=" + resp + "&v-token=" + $("#v-token").val();
+                                        var nu = "https://" + requestedUrl.hostname + "/go" + requestedUrl.pathname;
+                                        got.post(nu, {
+                                            body: b,
+                                            headers: {
+                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                                "Accept-Language": "en-US,en;q=0.5",
+                                                "Accept-Encoding": "gzip, deflate, br",
+                                                "Referer": requestedUrl.href,
+                                                "Content-Type": "application/x-www-form-urlencoded",
+                                                "Content-Length": totalBytes(b),
+                                                "Origin": "https://" + requestedUrl.hostname,
+                                                "DNT": "1",
+                                                "Connection": "keep-alive",
+                                                "Cookie": coo,
+                                                "Upgrade-Insecure-Requests": "1",
+                                                "Sec-Fetch-Dest": "document",
+                                                "Sec-Fetch-Mode": "navigate",
+                                                "Sec-Fetch-Site": "same-origin",
+                                                "Sec-GPC": "1",
+                                                "TE": "Trailers"
+                                            }   
+                                        }).then(function(resp) {
+                                            if (resp.url !== nu) {
+                                                response.writeHead(200, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": true,
+                                                    "url": error.response.url
+                                                });
+                                                response.end(j);
+                                                return;
+                                            }
+                                            var $ = cheerio.load(resp.body);
+                                            var nc = "";
+                                            for (var c in resp.headers["set-cookie"]) {
+                                                var nc = nc + resp.headers["set-cookie"][c].split("; ")[0] + "; ";
+                                            }
+                                            var co = combineCook(coo, nc);
+                                            var b2 = "_token=" + $("#form-go [name=_token]").val() + "&x-token=" + $("#x-token").val();
+                                            got.post($("#form-go").attr("action"), {
+                                                body: b2,
+                                                headers: {
+                                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                                    "Accept-Language": "en-US,en;q=0.5",
+                                                    "Accept-Encoding": "gzip, deflate, br",
+                                                    "Referer": nu,
+                                                    "Content-Type": "application/x-www-form-urlencoded",
+                                                    "Content-Length": totalBytes(b2),
+                                                    "Origin": "https://" + requestedUrl.hostname,
+                                                    "DNT": "1",
+                                                    "Connection": "keep-alive",
+                                                    "Cookie": co,
+                                                    "Upgrade-Insecure-Requests": "1",
+                                                    "Sec-Fetch-Dest": "document",
+                                                    "Sec-Fetch-Mode": "navigate",
+                                                    "Sec-Fetch-Site": "same-origin",
+                                                    "Sec-GPC": "1",
+                                                    "TE": "Trailers"
+                                                }
+                                            }).then(function(resp) {
+                                                if (resp.url !== $("form").attr("action")) {
+                                                    response.writeHead(200, {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json"
+                                                    });
+                                                    var j = JSON.stringify({
+                                                        "success": true,
+                                                        "url": resp.url
+                                                    });
+                                                    response.end(j);
+                                                } else {
+                                                    response.writeHead(500, {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json"
+                                                    });
+                                                    var j = JSON.stringify({
+                                                        "success": false,
+                                                        "err": {
+                                                            "code": "noneFound",
+                                                            "message": "No redirects were found."
+                                                        }
+                                                    });
+                                                    response.end(j);
+                                                }
+                                            }).catch(function(error) {
+                                                if (error.response && error.response.url !== $("form").attr("action")) {
+                                                    response.writeHead(200, {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json"
+                                                    });
+                                                    var j = JSON.stringify({
+                                                        "success": true,
+                                                        "url": error.response.url
+                                                    });
+                                                    response.end(j);
+                                                } else {
+                                                    response.writeHead(500, {
+                                                        "Access-Control-Allow-Origin": "*",
+                                                        "Content-Type": "application/json"
+                                                    });
+                                                    var j = JSON.stringify({
+                                                        "success": false,
+                                                        "err": {
+                                                            "code": error.code,
+                                                            "stack": error.stack,
+                                                            "message": error.message
+                                                        }
+                                                    });
+                                                    response.end(j);
+                                                }
+                                            });
+                                        }).catch(function(error) {
+                                            if (error.response && error.response.url !== $("form").attr("action")) {
+                                                response.writeHead(200, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": true,
+                                                    "url": error.response.url
+                                                });
+                                                response.end(j);
+                                            } else {
+                                                response.writeHead(500, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": false,
+                                                    "err": {
+                                                        "code": error.code,
+                                                        "stack": error.stack,
+                                                        "message": error.message
+                                                    }
+                                                });
+                                                response.end(j);
+                                            }
                                         });
-                                        response.writeHead(200, {
+                                    }).catch(function(error) {
+                                        response.writeHead(500, {
                                             "Access-Control-Allow-Origin": "*",
                                             "Content-Type": "application/json"
                                         });
+                                        var j = JSON.stringify({
+                                            "success": false,
+                                            "err": {
+                                                "code": error.code,
+                                                "stack": error.stack,
+                                                "message": error.message
+                                            }
+                                        });
                                         response.end(j);
-                                    }, 3000);
-                                } catch(error) {
+                                    });
+                                }).catch(function(error) {
                                     response.writeHead(500, {
                                         "Access-Control-Allow-Origin": "*",
                                         "Content-Type": "application/json"
@@ -528,16 +695,14 @@ function requestListner(request, response) {
                                     var j = JSON.stringify({
                                         "success": false,
                                         "err": {
-                                            "code": err.code,
-                                            "stack": err.stack,
-                                            "message": err.message
+                                            "code": error.code,
+                                            "stack": error.stack,
+                                            "message": error.message
                                         }
                                     });
                                     response.end(j);
-                                } finally {
-                                    await browser.close();
-                                }
-                            })();
+                                });
+                            }
                         return;
 
                         default:
@@ -737,4 +902,30 @@ function requestListner(request, response) {
 
 function totalBytes(string) {
     return encodeURI(string).split(/%..|./).length - 1;
+}
+
+function combineCook(oc, nc) {
+    var re = [];
+    var ncs = "";
+    for (var c in nc.split("; ")) {
+        re.push(nc.split("; ")[c].split("=")[0]);
+    }
+    for (var c in oc.split("; ")) {
+        if (inRp(oc.split("; ")[c].split("=")[0], re)) {
+            ncs = ncs + oc.split("; ")[c].split("=")[0] + "=" + nc.split("; ")[c].split("=").slice(1).join() + "; ";
+        } else {
+            ncs = ncs + oc.split("; ")[c].split("=")[0] + "=" + oc.split("; ")[c].split("=").slice(1).join() + "; ";
+        }
+    }
+
+    if (ncs.includes(" =;")) { ncs.replace(" =;", "")}
+
+    return ncs;
+}
+
+function inRp(n, r) {
+    for (var c in r) {
+        if (r[c] == n) {return true;} else {continue;}
+    }
+    return false;
 }

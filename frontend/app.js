@@ -2,6 +2,7 @@ document.getElementById("reqScript").style.display = "";
 if (window.location.hash !== "") {document.getElementById("url").value = window.location.hash.substring(1); bypass();}
 
 function bypass() {
+    if (document.getElementById("loading").style.display == "") {return;}
     document.getElementById("success").style.display = "none";
     document.getElementById("fail").style.display = "none";
     document.getElementById("loading").style.display = "";
