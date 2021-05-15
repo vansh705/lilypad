@@ -22,7 +22,7 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 - won.pe*
 - general redirects (tested on bit.ly, tinyurl.com, goo.gl, youtu.be, ow.ly)
 
-## roadmap
+## tba sites
 - za.gl
 
 ### note
