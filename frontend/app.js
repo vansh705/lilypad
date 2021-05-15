@@ -20,9 +20,13 @@ function bypass() {
             document.getElementById("link").href = j.url;
             document.getElementById("link").innerHTML = j.url;
         } else {
+            if (j.err.message == "Response code 403 (Forbidden)") {
+                document.getElementById("errTxt").innerHTML = j.err.message + "<b>This may mean that our IP was blocked by the site.</b>";
+            } else {
+                document.getElementById("errTxt").innerHTML = j.err.message;
+            }
             document.getElementById("fail").style.display = "";
             document.getElementById("loading").style.display = "none";
-            document.getElementById("errTxt").innerHTML = j.err.message;
         }
     }
 }
