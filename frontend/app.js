@@ -21,7 +21,7 @@ function bypass() {
             document.getElementById("link").innerHTML = j.url;
         } else {
             if (j.err.message == "Response code 403 (Forbidden)") {
-                document.getElementById("errTxt").innerHTML = j.err.message + "<b>This may mean that our IP was blocked by the site.</b>";
+                document.getElementById("errTxt").innerHTML = j.err.message + " <b>This may mean that our IP was blocked by the site.</b>";
             } else {
                 document.getElementById("errTxt").innerHTML = j.err.message;
             }
