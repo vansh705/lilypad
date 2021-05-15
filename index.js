@@ -680,9 +680,7 @@ function requestListner(request, response) {
                                         var j = JSON.stringify({
                                             "success": false,
                                             "err": {
-                                                "code": error.code,
-                                                "stack": error.stack,
-                                                "message": error.message
+                                                "message": error
                                             }
                                         });
                                         response.end(j);
@@ -716,6 +714,181 @@ function requestListner(request, response) {
                                 });
                                 response.end(j);
                             }
+                        return;
+
+                        case "won.pe":
+                            if (fs.existsSync(__dirname + "/config.json")) {
+                                got(requestedUrl.href, {
+                                    headers: {
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                        "Accept-Language": "en-US,en;q=0.5",
+                                        "Accept-Encoding": "gzip, deflate, br",
+                                        "DNT": "1",
+                                        "Connection": "keep-alive",
+                                        "Upgrade-Insecure-Requests": "1",
+                                        "Sec-Fetch-Dest": "document",
+                                        "Sec-Fetch-Mode": "navigate",
+                                        "Sec-Fetch-Site": "none",
+                                        "Sec-GPC": "1",
+                                        "TE": "Trailers"
+                                    }
+                                }).then(function(resp) {
+                                    var $ = cheerio.load(resp.body);
+                                    var lid = $("#lid").val();
+                                    var token = $("#token").val();
+                                    var vid = $("#vid").val();
+                                    var ads = "1";
+                                    var adb = "false";
+                                    for (var c in $("body script")) {
+                                        if ($("body script")[c].attribs && $("body script")[c].attribs.src && $("body script")[c].attribs.src.includes("?render")) {
+                                            var sk = parse($("body script")[c].attribs.src, true).query.render;
+                                        } else {
+                                            continue;
+                                        }
+                                    }
+                                    ac.setAPIKey(JSON.parse(fs.readFileSync(__dirname + "/config.json")).key);
+                                    ac.shutUp();
+                                    ac.solveRecaptchaV2Proxyless(requestedUrl.href, sk).then(function(resp) {
+                                        var p = "response=" + resp + "&ads=" + ads + "&lid=" + lid + "&vid=" + vid + "&token=" + token + "&adblock=" + adb + "&referer=&push=";
+                                        got.post("https://won.pe/ajax/click", {
+                                            body: p,
+                                            headers: {
+                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                                "Accept-Language": "en-US,en;q=0.5",
+                                                "Accept-Encoding": "gzip, deflate, br",
+                                                "Referer": requestedUrl.href,
+                                                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                                                "X-Requested-With": "XMLHttpRequest",
+                                                "Content-Length": totalBytes(p),
+                                                "DNT": "1",
+                                                "Connection": "keep-alive",
+                                                "Upgrade-Insecure-Requests": "1",
+                                                "Sec-Fetch-Dest": "document",
+                                                "Sec-Fetch-Mode": "navigate",
+                                                "Sec-Fetch-Site": "none",
+                                                "Sec-GPC": "1",
+                                                "TE": "Trailers"
+                                            }
+                                        }).then(function(resp) {
+                                            var rj = JSON.parse(resp.body);
+                                            if (rj.url) {
+                                                var j = JSON.stringify({
+                                                    "success": true,
+                                                    "url": rj.url
+                                                });
+                                                response.end(j);
+                                            } else {
+                                                response.writeHead(500, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": false,
+                                                    "err": {
+                                                        "code": "noneFound",
+                                                        "message": "No redirects were found."
+                                                    }
+                                                });
+                                                response.end(j);
+                                            }
+                                        }).catch(function(error) {
+                                            response.writeHead(500, {
+                                                "Access-Control-Allow-Origin": "*",
+                                                "Content-Type": "application/json"
+                                            });
+                                            var j = JSON.stringify({
+                                                "success": false,
+                                                "err": {
+                                                    "code": error.code,
+                                                    "stack": error.stack,
+                                                    "message": error.message
+                                                }
+                                            });
+                                            response.end(j);
+                                        });
+                                    }).catch(function(error) {
+                                        response.writeHead(500, {
+                                            "Access-Control-Allow-Origin": "*",
+                                            "Content-Type": "application/json"
+                                        });
+                                        var j = JSON.stringify({
+                                            "success": false,
+                                            "err": {
+                                                "message": error
+                                            }
+                                        });
+                                        response.end(j);
+                                    });
+                                }).catch(function(error) {
+                                    response.writeHead(500, {
+                                        "Access-Control-Allow-Origin": "*",
+                                        "Content-Type": "application/json"
+                                    });
+                                    var j = JSON.stringify({
+                                        "success": false,
+                                        "err": {
+                                            "code": error.code,
+                                            "stack": error.stack,
+                                            "message": error.message
+                                        }
+                                    });
+                                    response.end(j);
+                                });
+                            } else {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": "noACKey",
+                                        "message": "No Anti-Captcha key was provided by the instance owner."                                       
+                                    }
+                                });
+                                response.end(j);
+                            }
+                        return;
+
+                        case "ity.im":
+                            got(requestedUrl.href, {
+                                headers: {
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                    "Accept-Language": "en-US,en;q=0.5",
+                                    "Accept-Encoding": "gzip, deflate, br",
+                                    "DNT": "1",
+                                    "Connection": "keep-alive",
+                                    "Upgrade-Insecure-Requests": "1"
+                                }
+                            }).then(function(resp) {
+                                var $ = cheerio.load(resp.body);
+                                var j = JSON.stringify({
+                                    "success": true,
+                                    "url": $(".col-md-4:not(#logo_div) a")[0].attribs.href
+                                });
+                                response.writeHead(200, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                response.end(j);
+                            }).catch(function(error) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": error.code,
+                                        "stack": error.stack,
+                                        "message": error.message
+                                    }
+                                });
+                                response.end(j);
+                            });
                         return;
 
                         default:
