@@ -702,6 +702,19 @@ function requestListner(request, response) {
                                     });
                                     response.end(j);
                                 });
+                            } else {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": "noACKey",
+                                        "message": "No Anti-Captcha key was provided by the instance owner."
+                                    }
+                                });
+                                response.end(j);
                             }
                         return;
 
