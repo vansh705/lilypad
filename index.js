@@ -31,7 +31,7 @@ function requestListner(request, response) {
                         case "adshrink.it":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -92,7 +92,7 @@ function requestListner(request, response) {
                             var uu = "https://publisher.linkvertise.com/api/v1/redirect/link/static" + requestedUrl.pathname;
                             got(uu, { 
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -115,7 +115,7 @@ function requestListner(request, response) {
                                 var uu2 = "https://publisher.linkvertise.com/api/v1/redirect/link" + requestedUrl.pathname + "/target?serial=" + serial;
                                 got.post(uu2, {
                                     headers: {
-                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                         "Accept-Language": "en-US,en;q=0.5",
                                         "Accept-Encoding": "gzip, deflate, br",
@@ -172,7 +172,7 @@ function requestListner(request, response) {
                         case "t.co":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -216,7 +216,7 @@ function requestListner(request, response) {
                         case "shortly.xyz":
                             got(u, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -231,7 +231,7 @@ function requestListner(request, response) {
                                 got.post("https://shortly.xyz/getlink.php", {
                                     body: i,
                                     headers: {
-                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                         "Accept": "*/*",
                                         "Accept-Language": "en-US,en;q=0.5",
                                         "Accept-Encoding": "gzip, deflate, br",
@@ -291,7 +291,7 @@ function requestListner(request, response) {
                         case "www.sub2unlock.net":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -331,7 +331,7 @@ function requestListner(request, response) {
                         case "shortconnect.com":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -373,7 +373,7 @@ function requestListner(request, response) {
                         case "bst.gg":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -424,7 +424,7 @@ function requestListner(request, response) {
                         case "href.li":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -464,7 +464,7 @@ function requestListner(request, response) {
                         case "adfoc.us":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -506,7 +506,7 @@ function requestListner(request, response) {
                                 ac.setAPIKey(JSON.parse(fs.readFileSync(__dirname + "/config.json")).key);
                                 got(requestedUrl.href, {
                                     headers: {
-                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                         "Accept-Language": "en-US,en;q=0.5",
                                         "Accept-Encoding": "gzip, deflate, br",
@@ -534,7 +534,7 @@ function requestListner(request, response) {
                                         got.post(nu, {
                                             body: b,
                                             headers: {
-                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                                 "Accept-Language": "en-US,en;q=0.5",
                                                 "Accept-Encoding": "gzip, deflate, br",
@@ -566,16 +566,13 @@ function requestListner(request, response) {
                                                 return;
                                             }
                                             var $ = cheerio.load(resp.body);
-                                            var nc = "";
-                                            for (var c in resp.headers["set-cookie"]) {
-                                                var nc = nc + resp.headers["set-cookie"][c].split("; ")[0] + "; ";
-                                            }
+                                            console.log(resp.headers)
                                             var co = combineCook(coo, nc);
                                             var b2 = "_token=" + $("#form-go [name=_token]").val() + "&x-token=" + $("#x-token").val();
                                             got.post($("#form-go").attr("action"), {
                                                 body: b2,
                                                 headers: {
-                                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                                     "Accept-Language": "en-US,en;q=0.5",
                                                     "Accept-Encoding": "gzip, deflate, br",
@@ -720,7 +717,7 @@ function requestListner(request, response) {
                             if (fs.existsSync(__dirname + "/config.json")) {
                                 got(requestedUrl.href, {
                                     headers: {
-                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                         "Accept-Language": "en-US,en;q=0.5",
                                         "Accept-Encoding": "gzip, deflate, br",
@@ -754,7 +751,7 @@ function requestListner(request, response) {
                                         got.post("https://won.pe/ajax/click", {
                                             body: p,
                                             headers: {
-                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                                 "Accept-Language": "en-US,en;q=0.5",
                                                 "Accept-Encoding": "gzip, deflate, br",
@@ -855,7 +852,7 @@ function requestListner(request, response) {
                         case "ity.im":
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
@@ -891,10 +888,244 @@ function requestListner(request, response) {
                             });
                         return;
 
+                        case "fc.lc":
+                            got(requestedUrl.href, {
+                                headers: {
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                    "Accept-Language": "en-US,en;q=0.5",
+                                    "Accept-Encoding": "gzip, deflate, br",
+                                    "DNT": "1",
+                                    "Connection": "keep-alive",
+                                    "Upgrade-Insecure-Requests": "1"
+                                }
+                            }).then(function(resp) {
+                                console.log("init")
+                                var $ = cheerio.load(resp.body);
+                                var afd = $("form [name='ad_form_data']").val();
+                                var rt = $("form [name='random_token']").val();
+                                var v = $("form [name='visitor']").val();
+                                var a = $("form [name='alias']").val();
+                                var d = "ad_form_data=" + afd + "&random_token=" + rt + "&visitor=" + v + "&alias=" + a;
+                                var n = $("form").attr("action");
+                                setTimeout(function() {
+                                    got.post(n, {
+                                        body: d,
+                                        headers: {
+                                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                            "Accept-Language": "en-US,en;q=0.5",
+                                            "Accept-Encoding": "gzip, deflate, br",
+                                            "Content-Type": "application/x-www-form-urlencoded",
+                                            "Content-Length": totalBytes(d),
+                                            "Origin": "https://fc.lc",
+                                            "Referer": "https://fc.lc/",
+                                            "DNT": "1",
+                                            "Connection": "keep-alive",
+                                            "Upgrade-Insecure-Requests": "1",
+                                            "Sec-Fetch-Dest": "document",
+                                            "Sec-Fetch-Mode": "navigate",
+                                            "Sec-Fetch-Site": "cross-site",
+                                            "Sec-Fetch-User": "?1",
+                                            "Sec-GPC": "1"
+                                        }
+                                    }).then(function(resp) {
+                                        console.log("post 1")
+                                        var $ = cheerio.load(resp.body);
+                                        var afd = $("#submit_data [name='ad_form_data']").val();
+                                        var rt = $("#submit_data [name='random_token']").val();
+                                        var v = $("#submit_data [name='visitor']").val();
+                                        var nu = $("#submit_data").attr("action");
+                                        var d = "ad_form_data=" + afd + "&random_token=" + rt + "&visitor=" + v;
+                                        got.post(nu, {
+                                            body: d,
+                                            headers: {
+                                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                                "Accept-Language": "en-US,en;q=0.5",
+                                                "Accept-Encoding": "gzip, deflate, br",
+                                                "Content-Type": "application/x-www-form-urlencoded",
+                                                "Content-Length": totalBytes(d),
+                                                "Origin": "https://redirecto.link",
+                                                "Referer": "https://redirecto.link/",
+                                                "DNT": "1",
+                                                "Connection": "keep-alive",
+                                                "Upgrade-Insecure-Requests": "1",
+                                                "Sec-Fetch-Dest": "document",
+                                                "Sec-Fetch-Mode": "navigate",
+                                                "Sec-Fetch-Site": "cross-site",
+                                                "Sec-Fetch-User": "?1",
+                                                "Sec-GPC": "1"
+                                            }
+                                        }).then(function(resp) {
+                                            console.log("post 2")
+                                            var $ = cheerio.load(resp.body);
+                                            var sk = $(".g-recaptcha")[0].attribs["data-sitekey"];
+                                            var coo = "";
+                                            for (var c in resp.headers["set-cookie"]) {
+                                                var coo = coo + resp.headers["set-cookie"][c].split("; ")[0] + "; ";
+                                            }
+                                            ac.setAPIKey(JSON.parse(fs.readFileSync(__dirname + "/config.json")).key);
+                                            ac.shutUp();
+                                            ac.solveRecaptchaV2Proxyless(resp.url, sk).then(function(resp) {
+                                                var afd = encodeURIComponent($("form [name='ad_form_data']").val());
+                                                var rt = encodeURIComponent($("form [name='random_token']").val());
+                                                var v = encodeURIComponent($("form [name='visitor']").val());
+                                                var tf = encodeURIComponent($("form [name='_Token[fields]']").val());
+                                                var tu = encodeURIComponent($("form [name='_Token[unlocked]']").val());
+                                                var d = "_method=POST&ad_form_data=" + afd + "&random_token=" + rt + "&visitor=" + v + "&g-recaptcha-response=" + resp + "&_Token%5Bfields%5D=" + tf + "&_Token%5Bunlocked%5D=" + tu;
+                                                setTimeout(function() {
+                                                    got.post(nu, {
+                                                        body: d,
+                                                        headers: {
+                                                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                                            "Accept-Language": "en-US,en;q=0.5",
+                                                            "Accept-Encoding": "gzip, deflate, br",
+                                                            "Content-Type": "application/x-www-form-urlencoded",
+                                                            "Content-Length": totalBytes(d),
+                                                            "Origin": n,
+                                                            "DNT": "1",
+                                                            "Connection": "keep-alive",
+                                                            "Cookie": coo,
+                                                            "Upgrade-Insecure-Requests": "1",
+                                                            "Sec-Fetch-Dest": "document",
+                                                            "Sec-Fetch-Mode": "navigate",
+                                                            "Sec-Fetch-Site": "cross-site",
+                                                            "Sec-Fetch-User": "?1",
+                                                            "Sec-GPC": "1"
+                                                        }
+                                                    }).then(function(resp) {
+                                                        console.log("post 3")
+                                                        var $ = cheerio.load(resp.body);
+                                                        var ab = encodeURIComponent($("#ab").val());
+                                                        var afd = encodeURIComponent($("form [name='ad_form_data']").val());
+                                                        var rt = encodeURIComponent($("form [name='random_token']").val());
+                                                        var v = encodeURIComponent($("form [name='visitor']").val());
+                                                        var tf = encodeURIComponent($("form [name='_Token[fields]']").val());
+                                                        var tu = encodeURIComponent($("form [name='_Token[unlocked]']").val());
+                                                        var d = "_method=POST&ad_form_data=" + afd + "&random_token=" + rt + "&visitor=" + v + "&ab=" + ab + "&_Token%5Bfields%5D=" + tf + "&_Token%5Bunlocked%5D=" + tu;
+                                                        console.log(d);
+                                                        console.log(coo);
+                                                        setTimeout(function() {
+                                                            got.post("https://fc.lc/links/go", {
+                                                                body: d,
+                                                                headers: {
+                                                                    "Host": "fc.lc",
+                                                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                                                    "Accept": "application/json, text/javascript, */*; q=0.01",
+                                                                    "Accept-Language": "en-US,en;q=0.9",
+                                                                    "Accept-Encoding": "gzip, deflate, br",
+                                                                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                                                                    "Content-Length": totalBytes(d),
+                                                                    "Origin": "https://fcc.lc",
+                                                                    "Referer": "https://fcc.lc/",
+                                                                    "DNT": "1",
+                                                                    "Sec-Fetch-Dest": "empty",
+                                                                    "Sec-Fetch-Mode": "cors",
+                                                                    "Sec-Fetch-Site": "cross-site",
+                                                                    "Sec-GPC": "1"
+                                                                }
+                                                            }).then(function(resp) {
+                                                                console.log(resp)
+                                                            }).catch(function(error) {
+                                                                response.writeHead(500, {
+                                                                    "Access-Control-Allow-Origin": "*",
+                                                                    "Content-Type": "application/json"
+                                                                });
+                                                                var j = JSON.stringify({
+                                                                    "success": false,
+                                                                    "err": {
+                                                                        "code": error.code,
+                                                                        "stack": error.stack,
+                                                                        "message": error.message
+                                                                    }
+                                                                });
+                                                                response.end(j);
+                                                            })
+                                                        }, 5000);
+                                                    }).catch(function(error) {
+                                                        response.writeHead(500, {
+                                                            "Access-Control-Allow-Origin": "*",
+                                                            "Content-Type": "application/json"
+                                                        });
+                                                        var j = JSON.stringify({
+                                                            "success": false,
+                                                            "err": {
+                                                                "code": error.code,
+                                                                "stack": error.stack,
+                                                                "message": error.message
+                                                            }
+                                                        });
+                                                        response.end(j);
+                                                    })
+                                                }, 4951);
+                                                
+                                            }).catch(function(error) {
+                                                response.writeHead(500, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": false,
+                                                    "err": {
+                                                        "message": error
+                                                    }
+                                                });
+                                                response.end(j);
+                                            })
+                                        }).catch(function(error) {
+                                            response.writeHead(500, {
+                                                "Access-Control-Allow-Origin": "*",
+                                                "Content-Type": "application/json"
+                                            });
+                                            var j = JSON.stringify({
+                                                "success": false,
+                                                "err": {
+                                                    "code": error.code,
+                                                    "stack": error.stack,
+                                                    "message": error.message
+                                                }
+                                            });
+                                            response.end(j);
+                                        });
+                                    }).catch(function(error) {
+                                        response.writeHead(500, {
+                                            "Access-Control-Allow-Origin": "*",
+                                            "Content-Type": "application/json"
+                                        });
+                                        var j = JSON.stringify({
+                                            "success": false,
+                                            "err": {
+                                                "code": error.code,
+                                                "stack": error.stack,
+                                                "message": error.message
+                                            }
+                                        });
+                                        response.end(j);
+                                    });
+                                }, 5490);
+                            }).catch(function(error) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": error.code,
+                                        "stack": error.stack,
+                                        "message": error.message
+                                    }
+                                });
+                                response.end(j);
+                            });
+                        return;
+
                         default:
                             got(requestedUrl.href, {
                                 headers: {
-                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
                                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                                     "Accept-Language": "en-US,en;q=0.5",
                                     "Accept-Encoding": "gzip, deflate, br",
