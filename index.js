@@ -1122,6 +1122,163 @@ function requestListner(request, response) {
                             });
                         return;
 
+                        case "exey.io":
+                            got(requestedUrl.href, {
+                                headers: {
+                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                    "Accept-Language": "en-US,en;q=0.5",
+                                    "Accept-Encoding": "gzip, deflate, br",
+                                    "DNT": "1",
+                                    "Connection": "keep-alive",
+                                    "Upgrade-Insecure-Requests": "1",
+                                    "sec-fetch-dest": "document",
+                                    "sec-fetch-mode": "navigate",
+                                    "sec-fetch-site": "cross-site",
+                                    "sec-fetch-user": "?1",
+                                    "sec-gpc": "1"
+                                }
+                            }).then(function(resp) {
+                                var $ = cheerio.load(resp.body);
+                                var c = $("#before-captcha [name='_csrfToken']").val();
+                                var f = encodeURIComponent($("#before-captcha [name='_Token[fields]']").val());
+                                var u = encodeURIComponent($("#before-captcha [name='_Token[unlocked]']").val());
+                                var b = "_method=POST&_csrfToken=" + c + "&extraPage=2&ref=&f_n=sle&_Token%5Bfields%5D=" + f + "&_Token%5Bunlocked%5D=" + u;
+                                var coo = "";
+                                for (var c in resp.headers["set-cookie"]) {
+                                    var coo = coo + resp.headers["set-cookie"][c].split("; ")[0] + "; ";
+                                }
+                                setTimeout(function() {
+                                    got.post(requestedUrl.href, {
+                                        body: b,
+                                        headers: {
+                                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                                            "Accept-Language": "en-US,en;q=0.5",
+                                            "Accept-Encoding": "gzip, deflate, br",
+                                            "cache-control": "max-age=0",
+                                            "Content-Length": totalBytes(b),
+                                            "Content-Type": "application/x-www-form-urlencoded",
+                                            "Cookie": coo,
+                                            "DNT": "1",
+                                            "Connection": "keep-alive",
+                                            "Upgrade-Insecure-Requests": "1",
+                                            "sec-fetch-dest": "document",
+                                            "sec-fetch-mode": "navigate",
+                                            "sec-fetch-site": "cross-site",
+                                            "sec-fetch-user": "?1",
+                                            "sec-gpc": "1"
+                                        }
+                                    }).then(async function(resp) {
+                                        var $ = cheerio.load(resp.body);
+                                        var cr = $("#link-view [name='_csrfToken']").val();
+                                        var f = encodeURIComponent($("#link-view [name='_Token[fields]']").val());
+                                        var u = encodeURIComponent($("#link-view [name='_Token[unlocked]']").val());
+                                        for (var c in $("script")) {
+                                            if (
+                                                $("script")[c] &&
+                                                $("script")[c].children &&
+                                                $("script")[c].children[0] &&
+                                                $("script")[c].children[0].data &&
+                                                $("script")[c].children[0].data.includes("invisible_reCAPTCHA")
+                                            ) {
+                                                var sk = $("script")[c].children[0].data.split('"invisible_reCAPTCHA_site_key":"')[1].split('"')[0];
+                                            }
+                                        }
+                                        ac.setAPIKey(JSON.parse(fs.readFileSync(__dirname + "/config.json")).key);
+                                        ac.shutUp();
+                                        ac.solveRecaptchaV2Proxyless(resp.url, sk).then(function(resp) {
+                                            console.log(ac.getCookies());
+                                            var b = "_method=POST&_csrfToken=" + cr + "&ref=" + encodeURIComponent(requestedUrl.href.toLowerCase()) + "&f_n=slc&g-recaptcha-response=" + encodeURIComponent(resp) + "&_Token%5Bfields%5D=" + f + "&_Token%5Bunlocked%5D=" + u;
+                                            console.log(b);
+                                            got.post(requestedUrl.href, {
+                                                body: b,
+                                                headers: {
+                                                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+                                                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                                                    "Accept-Language": "en-US,en;q=0.5",
+                                                    "Accept-Encoding": "gzip, deflate, br",
+                                                    "cache-control": "max-age=0",
+                                                    "Content-Length": totalBytes(b),
+                                                    "Content-Type": "application/x-www-form-urlencoded",
+                                                    "Cookie": coo + " ab=2;",
+                                                    "DNT": "1",
+                                                    "Origin": "https://exey.io",
+                                                    "Referer": requestedUrl.href,
+                                                    "Connection": "keep-alive",
+                                                    "Upgrade-Insecure-Requests": "1",
+                                                    "sec-fetch-dest": "document",
+                                                    "sec-fetch-mode": "navigate",
+                                                    "sec-fetch-site": "same-origin",
+                                                    "sec-fetch-user": "?1",
+                                                    "sec-gpc": "1"
+                                                }
+                                            }).then(function(resp) {
+                                                console.log(resp);
+                                            }).catch(function(error) {
+                                                console.log(error.response)
+                                                response.writeHead(500, {
+                                                    "Access-Control-Allow-Origin": "*",
+                                                    "Content-Type": "application/json"
+                                                });
+                                                var j = JSON.stringify({
+                                                    "success": false,
+                                                    "err": {
+                                                        "code": error.code,
+                                                        "stack": error.stack,
+                                                        "message": error.message
+                                                    }
+                                                });
+                                                response.end(j);
+                                            })
+                                        }).catch(function(error) {
+                                            response.writeHead(500, {
+                                                "Access-Control-Allow-Origin": "*",
+                                                "Content-Type": "application/json"
+                                            });
+                                            var j = JSON.stringify({
+                                                "success": false,
+                                                "err": {
+                                                    "code": error.code,
+                                                    "stack": error.stack,
+                                                    "message": error.message
+                                                }
+                                            });
+                                            response.end(j);
+                                        });
+                                    }).catch(function(error) {
+                                        response.writeHead(500, {
+                                            "Access-Control-Allow-Origin": "*",
+                                            "Content-Type": "application/json"
+                                        });
+                                        var j = JSON.stringify({
+                                            "success": false,
+                                            "err": {
+                                                "code": error.code,
+                                                "stack": error.stack,
+                                                "message": error.message
+                                            }
+                                        });
+                                        response.end(j);
+                                    });
+                                }, 500);
+                            }).catch(function(error) {
+                                response.writeHead(500, {
+                                    "Access-Control-Allow-Origin": "*",
+                                    "Content-Type": "application/json"
+                                });
+                                var j = JSON.stringify({
+                                    "success": false,
+                                    "err": {
+                                        "code": error.code,
+                                        "stack": error.stack,
+                                        "message": error.message
+                                    }
+                                });
+                                response.end(j);
+                            });
+                        return;
+
                         default:
                             got(requestedUrl.href, {
                                 headers: {

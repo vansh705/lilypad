@@ -24,7 +24,8 @@ Lilypad is a Node-based website that bypasses popular link redirectors and prote
 
 ## tba sites
 - za.gl
-- fc.lc
+- fc.lc*
+- exey.io*
 
 ### note
 Websites marked with a * require an AntiCaptcha subscription. [Setup information can be found here](/setup/README.md).
